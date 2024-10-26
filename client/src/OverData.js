@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './OverData.css';
 
 function OverData({ fetchOverData, overData }) {
   useEffect(() => {

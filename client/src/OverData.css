@@ -1,0 +1,65 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+}
+
+/* Over Data container */
+.overdata-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Over Data list styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f1f1f1;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    color: #555;
+}
+
+/* Hover effects for interactivity */
+li:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: scale(1.02);
+}
+
+/* Add some padding to individual data entries */
+li::before {
+    content: "📊 ";
+    margin-right: 10px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .overdata-container {
+        padding: 15px;
+    }
+
+    li {
+        font-size: 16px;
+    }
+}

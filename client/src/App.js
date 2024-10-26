@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 import axios from 'axios';
-import { Routes, Route, Link } from 'react-router-dom'; // Removed useNavigate
+import logo from './Image/logo.jpeg'
+import { Routes, Route, Link } from 'react-router-dom';
 import UserData from './UserData';
 import OverData from './OverData';
-import Signup from './Signup'; // Import the Signup component
-import Login from './Login'; // Import the Login component
+import Signup from './Signup';
+import Login from './Login';
 
 function Home({ dbName, setDbName, handleCreateDatabase, message }) {
     return (
@@ -27,6 +29,7 @@ function App() {
     const [dbName, setDbName] = useState('');
     const [message, setMessage] = useState('');
     const [overData, setOverData] = useState([]);
+    const [click, setClick] = useState(false); // State for mobile menu
 
     // Load the saved database name from localStorage
     useEffect(() => {
@@ -68,14 +71,39 @@ function App() {
         }
     };
 
+    const handleClick = () => setClick(!click); // Toggle menu visibility
+
     return (
         <div className="App">
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/user-data">User Data</Link>
-                <Link to="/overdata">Over Data</Link>
-                <Link to="/signup">Signup</Link> {/* Add Signup link */}
-                <Link to="/login">Login</Link> {/* Add Login link */}
+            <nav className="navbar">
+                <div className="navbar-container">
+                   
+                 
+                <img className='logo' src={logo}  alt="Logo" />
+                    
+                    <div className="navbar-toggle" onClick={handleClick}>
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                        <span className="bar"></span>
+                    </div>
+                    <ul className={`nav-menu ${click ? 'active' : ''}`}>
+                        <li className="nav-item">
+                            <Link to="/" className="nav-links">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/user-data" className="nav-links">User Data</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/overdata" className="nav-links">Over Data</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/signup" className="nav-links">Signup</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/login" className="nav-links">Login</Link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
             <Routes>
@@ -92,8 +120,8 @@ function App() {
                 />
                 <Route path="/user-data" element={<UserData dbName={dbName} />} />
                 <Route path="/overdata" element={<OverData fetchOverData={fetchOverData} overData={overData} />} />
-                <Route path="/signup" element={<Signup />} /> {/* Route for Signup */}
-                <Route path="/login" element={<Login />} /> {/* Route for Login */}
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </div>
     );
