@@ -46,6 +46,7 @@ app.post('/create-database', async (req, res) => {
 });
 
 // Endpoint to store data
+// Endpoint to store data
 app.post('/store-data', async (req, res) => {
     const { dbName, data } = req.body;
 
@@ -56,11 +57,13 @@ app.post('/store-data', async (req, res) => {
     try {
         const db = client.db(dbName);
         const collection = db.collection('exampleCollection');
-        await collection.insertOne(data);
+
+        // Insert all data values into the collection
+        await collection.insertMany(data);
 
         const overdataDb = client.db('overdata');
         const overdataCollection = overdataDb.collection('overdataCollection');
-        await overdataCollection.insertOne(data);
+        await overdataCollection.insertMany(data);
 
         res.json({ message: 'Data stored successfully in both databases!' });
     } catch (error) {
@@ -68,6 +71,7 @@ app.post('/store-data', async (req, res) => {
         res.status(500).json({ message: 'Internal server error', error: error.message });
     }
 });
+
 
 // Endpoint to retrieve user data
 app.get('/get-user-data/:dbName', async (req, res) => {
